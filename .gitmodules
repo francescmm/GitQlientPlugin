@@ -1,0 +1,3 @@
+[submodule "GitQlient"]
+	path = GitQlient
+	url = git@github.com:francescmm/GitQlient.git

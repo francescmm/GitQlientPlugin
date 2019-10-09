@@ -40,8 +40,8 @@ public:
    ShutdownFlag aboutToShutdown() override;
 
 private:
-   void triggerAction();
    MyMode *myMode = nullptr;
+   QString mCurrentProject;
 };
 
 } // namespace Internal

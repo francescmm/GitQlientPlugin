@@ -80,17 +80,6 @@ bool GitQlientPlugin::initialize(const QStringList &arguments, QString *errorStr
    Q_UNUSED(arguments)
    Q_UNUSED(errorString)
 
-   auto action = new QAction(tr("GitQlientPlugin Action"), this);
-   Core::Command *cmd = Core::ActionManager::registerAction(action, GitQLientPlugin::Internal::ACTION_ID,
-                                                            Core::Context(Core::Constants::C_GLOBAL));
-   cmd->setDefaultKeySequence(QKeySequence(tr("Ctrl+Alt+Meta+A")));
-   connect(action, &QAction::triggered, this, &GitQlientPlugin::triggerAction);
-
-   Core::ActionContainer *menu = Core::ActionManager::createMenu(GitQLientPlugin::Internal::MENU_ID);
-   menu->menu()->setTitle(tr("GitQlientPlugin"));
-   menu->addAction(cmd);
-   Core::ActionManager::actionContainer(Core::Constants::M_TOOLS)->addMenu(menu);
-
    myMode = new MyMode();
 
    connect(Core::ModeManager::instance(), &Core::ModeManager::currentModeAboutToChange, this, [this](Core::Id mode) {
@@ -98,8 +87,13 @@ bool GitQlientPlugin::initialize(const QStringList &arguments, QString *errorStr
       {
          bool found;
          const auto workingDirectory = Utils::globalMacroExpander()->value("CurrentProject:Path", &found);
-         myMode->mGitImpl->setRepository(workingDirectory);
-         // Core::ModeManager::activateMode(myMode->id());
+
+         if (mCurrentProject != workingDirectory)
+         {
+            mCurrentProject = workingDirectory;
+            myMode->mGitImpl->setRepository(workingDirectory);
+         }
+
          Core::ModeManager::instance()->setFocusToCurrentMode();
       }
    });
@@ -120,22 +114,6 @@ ExtensionSystem::IPlugin::ShutdownFlag GitQlientPlugin::aboutToShutdown()
    // Disconnect from signals that are not needed during shutdown
    // Hide UI (if you add UI that is not in the main window directly)
    return SynchronousShutdown;
-}
-
-void GitQlientPlugin::triggerAction()
-{
-   bool found;
-   const auto workingDirectory = Utils::globalMacroExpander()->value("CurrentProject:Path", &found);
-
-   qDebug() << workingDirectory;
-
-   QMessageBox::information(Core::ICore::mainWindow(), tr("Action Triggered"),
-                            tr("This is an action from GitQlientPlugin."));
-
-   myMode->mGitImpl->setRepository(workingDirectory);
-
-   Core::ModeManager::activateMode(myMode->id());
-   Core::ModeManager::instance()->setFocusToCurrentMode();
 }
 
 } // namespace Internal

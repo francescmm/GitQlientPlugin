@@ -2,7 +2,8 @@ DEFINES += GITQLIENTPLUGIN_LIBRARY
 
 # GitEditorPlugin files
 
-CONFIG += qt
+CONFIG += qt warn_on c++17
+QMAKE_CXXFLAGS += -Werror
 
 SOURCES += \
     GitQlientPlugin.cpp
@@ -38,10 +39,13 @@ isEmpty(IDE_BUILD_TREE): IDE_BUILD_TREE = $$(HOME)"/Qt/Tools/QtCreator"
 ###### <dirname>_dependencies.pri, where <dirname> is the name of the directory containing the
 ###### plugin's sources.
 
-INCLUDEPATH += GitQlient
+INCLUDEPATH += \
+    GitQlient \
+    GitQlient/QLogger
 
 include(GitQlientPlugin_dependencies.pri)
 include(GitQlient/GitQlient.pri)
+include(GitQlient/QLogger/QLogger.pri)
 
 ###### End _dependencies.pri contents ######
 

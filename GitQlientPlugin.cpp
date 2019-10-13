@@ -31,7 +31,10 @@
 #include <plugins/projectexplorer/projectexplorer.h>
 
 #include <QDebug>
-#include <MainWindow.h>
+#include <GitQlient.h>
+
+#include <projectexplorer/session.h>
+#include <projectexplorer/project.h>
 
 namespace GitQlientPlugin
 {
@@ -52,7 +55,7 @@ MyMode::MyMode()
    setEnabled(true);
    setId(id);
 
-   setWidget(mGitImpl = new MainWindow());
+   setWidget(mGitImpl = new GitQlient());
 
    mGitImpl->setObjectName("mainWindow");
 }
@@ -87,12 +90,16 @@ bool GitQlientPlugin::initialize(const QStringList &arguments, QString *errorStr
       {
          bool found;
          const auto workingDirectory = Utils::globalMacroExpander()->value("CurrentProject:Path", &found);
+         const auto projects = ProjectExplorer::SessionManager::projects();
+         QStringList currentOpenedProjects;
 
-         if (mCurrentProject != workingDirectory)
+         for (auto project : projects)
          {
-            mCurrentProject = workingDirectory;
-            myMode->mGitImpl->setRepository(workingDirectory);
+            qDebug() << project->projectDirectory().toString();
+            currentOpenedProjects.append(project->projectDirectory().toString());
          }
+
+         myMode->mGitImpl->setRepositories(currentOpenedProjects);
 
          Core::ModeManager::instance()->setFocusToCurrentMode();
       }

@@ -9,7 +9,7 @@
 
 using namespace Core;
 
-class MainWindow;
+class GitQlient;
 
 namespace GitQlientPlugin
 {
@@ -23,7 +23,7 @@ class MyMode : public Core::IMode
 public:
    MyMode();
 
-   MainWindow *mGitImpl = nullptr;
+   GitQlient *mGitImpl = nullptr;
 };
 
 class GitQlientPlugin : public ExtensionSystem::IPlugin

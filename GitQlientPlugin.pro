@@ -3,7 +3,6 @@ DEFINES += GITQLIENTPLUGIN_LIBRARY
 # GitEditorPlugin files
 
 CONFIG += qt warn_on c++17
-QMAKE_CXXFLAGS += -Werror
 
 SOURCES += \
     GitQlientPlugin.cpp

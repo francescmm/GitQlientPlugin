@@ -40,10 +40,11 @@ isEmpty(IDE_BUILD_TREE): IDE_BUILD_TREE = $$(HOME)"/Qt/Tools/QtCreator"
 
 INCLUDEPATH += \
     GitQlient \
+    GitQlient/app \
     GitQlient/QLogger
 
 include(GitQlientPlugin_dependencies.pri)
-include(GitQlient/GitQlient.pri)
+include(GitQlient/app/GitQlient.pri)
 include(GitQlient/QLogger/QLogger.pri)
 
 ###### End _dependencies.pri contents ######
@@ -52,4 +53,4 @@ include($$IDE_SOURCE_TREE/src/qtcreatorplugin.pri)
 #include($$IDE_SOURCE_TREE/src/plugin/git/git_dependencies.pri)
 
 RESOURCES += \
-    resources.qrc
+    GitQlientPlugin.qrc

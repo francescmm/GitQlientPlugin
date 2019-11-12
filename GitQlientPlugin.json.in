@@ -1,6 +1,6 @@
 {
     \"Name\" : \"GitQlientPlugin\",
-    \"Version\" : \"0.9.1\",
+    \"Version\" : \"0.10.0\",
     \"CompatVersion\" : \"$$QTCREATOR_COMPAT_VERSION\",
     \"Vendor\" : \"Francesc Martinez\",
     \"Copyright\" : \"(C) $$QTCREATOR_COPYRIGHT_YEAR Francesc M.\",

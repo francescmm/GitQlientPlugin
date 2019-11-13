@@ -54,3 +54,7 @@ include($$IDE_SOURCE_TREE/src/qtcreatorplugin.pri)
 
 RESOURCES += \
     GitQlientPlugin.qrc
+
+OTHER_FILES += \
+    $$PWD/README.md \
+    $$PWD/.travis.yml

@@ -7,7 +7,7 @@ unzip -qq qtcreator-bin.zip
 export QTDIR=$PWD/qt5
 export PATH=$QTDIR/bin:$PATH;
 export QT_PLUGIN_PATH=$PWD/qt5/plugins;
-export HOME=.
+#export HOME=.
 $QTDIR/bin/qmake QTC_SOURCE=./qtcreator-src QTC_BUILD=./qtcreator-bin GitQlientPlugin.pro
 make -j 4
 ls -lsh

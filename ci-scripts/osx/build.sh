@@ -10,4 +10,4 @@ export QT_PLUGIN_PATH=$PWD/qt5/plugins;
 source ~/.bash_profile
 qmake QTC_SOURCE=./qt-creator-opensource-src-4.10.0 QTC_BUILD=. GitQlientPlugin.pro
 make
-cp Tools/QtCreator/bin/Qt\ Creator.app/Contents/PlugIns/libGitQlientPlugin.dylib libGitQlientPlugin-qtc${QTC_VERSION}_${TRAVIS_OS_NAME}.dylib
+cp bin/Qt\ Creator.app/Contents/PlugIns/libGitQlientPlugin.dylib libGitQlientPlugin-qtc${QTC_VERSION}_${TRAVIS_OS_NAME}.dylib

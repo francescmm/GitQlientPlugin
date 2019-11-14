@@ -5,9 +5,9 @@ unzip -qq qtcreator-src.zip
 wget -O qtcreator-bin.zip https://github.com/francescmm/ci-utils/releases/download/qt_5.13/Tools.zip;
 unzip -qq qtcreator-bin.zip
 export QTDIR=$PWD/qt5
-export PATH=$QTDIR/bin:$PATH;
+export QT_CREATOR=$HOME/Qt/Tools/QtCreator/bin
+export PATH=$QTDIR/bin:$QT_CREATOR:$PATH;
 export QT_PLUGIN_PATH=$PWD/qt5/plugins;
-#export HOME=.
 $QTDIR/bin/qmake QTC_SOURCE=./qt-creator-opensource-src-4.10.0 QTC_BUILD=./Tools GitQlientPlugin.pro
 make -j 4
-ls -lsh
+ls -lsh Tools/QtCreator/lib/qtcreator/plugins/libGitQlientPlugin*

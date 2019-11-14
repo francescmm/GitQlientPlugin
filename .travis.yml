@@ -1,4 +1,6 @@
 language: cpp
+env:
+  - QTC_VERSION="4.10.0"
 git:
   depth: 1
 sudo: required

@@ -36,7 +36,7 @@
 #include <projectexplorer/session.h>
 #include <projectexplorer/project.h>
 
-namespace GitQlient
+namespace GitQlientNamespace
 {
 
 namespace Internal

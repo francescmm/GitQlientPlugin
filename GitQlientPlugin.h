@@ -11,7 +11,7 @@ using namespace Core;
 
 class GitQlient;
 
-namespace GitQlient
+namespace GitQlientNamespace
 {
 namespace Internal
 {

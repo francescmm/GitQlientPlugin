@@ -11,4 +11,4 @@ source ~/.bash_profile
 qmake QTC_SOURCE=./qt-creator-opensource-src-4.10.0 QTC_BUILD=./Tools/QtCreator GitQlientPlugin.pro
 make
 ls -lsh Tools/QtCreator/lib/qtcreator/plugins/libGitQlientPlugin*
-cp Tools/QtCreator/lib/qtcreator/plugins/libGitQlientPlugin_"${TRAVIS_OS_NAME}" .
+cp Tools/QtCreator/lib/qtcreator/plugins/libGitQlientPlugin libGitQlientPlugin_"${TRAVIS_OS_NAME}"

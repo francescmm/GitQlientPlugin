@@ -23,7 +23,7 @@ deploy:
   provider: releases
   api_key:
     secure: PaSHclRssl8ufiAFALN6gydOkqiS/rQsdu30QHtPVFdby2sTMK8ZkaJo4uZf9wNkd9K4oovgXH7O8pMpH8MHFOuVf+d//gbcynxNxvjgw0f8VfGFsJqox66q8CcHlkuc66w+1EdMdVC6tSK9BYf8NcVafJNJu4HD4hqnWtHcrnUCSFuzWUCky3cu3VFka4DBc1zNCHztmos7uyNo7k0ttFBObbspJ4xQc7ZikSbVJpEmJ75lpY8cEVVI/6twls/xORdduymmo1Bb3/bZ8n2BVXD9Yi/rVrcWgguDgUMmmfZfuQkNVaO1yR6uhPfPHFC+DGWkF5hG1YOJC25RXjqB8slsAvHIUI7XCDKsxw6Mc13BxMUyGStqIHcnxGd7dJaowwiyPfEtDzao8nVOdxFu0eca8gRr7CJfEd+a+lDfqMvkeOQQfvF1JWlRyFUq/Nel/aSS+6HlwcFvD02o7eHwuwSGI6SUvkR9ne0ruSjmGBUMK8OViYUkyb1l4lTOk8AQAjLFzXFcO9PmpzQYfWg4iOvDy9sWUM6oUtAdHwIA2iUHd0AxEgL+8XMSwP7y1UDyZENW2QdySjmmAoVFoys6LPgN9w5zM8/wOZIaz2lx5KWZHhPasDJeLT5EpI0TNQTuXlExicYwca3Q1zXfI9XMSFEnsGm45jzevOaufYx3KH8=
-  file: "libGitQlientPlugin-qtc${QTC_VERSION}.so"
+  file: "${FILE}"
   skip_cleanup: true
   prerelease: true
   on:

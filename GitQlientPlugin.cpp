@@ -48,9 +48,9 @@ MyMode::MyMode()
    const Utils::Icon FLAT_ACTIVE({ { ":/git.png", Utils::Theme::IconsModeEditActiveColor } });
    setIcon(Utils::Icon::modeIcon(FLAT, FLAT, FLAT_ACTIVE));
 
-   Core::Id id("GitEditor");
+   Core::Id id("GitQlient");
 
-   setDisplayName("Git Editor");
+   setDisplayName("GitQlient");
    setPriority(88);
    setEnabled(true);
    setId(id);

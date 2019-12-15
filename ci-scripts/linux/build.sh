@@ -10,4 +10,4 @@ export PATH=$QTDIR/bin:$QT_CREATOR:$PATH;
 export QT_PLUGIN_PATH=$PWD/qt5/plugins;
 $QTDIR/bin/qmake QTC_SOURCE=./qt-creator-opensource-src-${QTC_VERSION} QTC_BUILD=./Tools/QtCreator GitQlientPlugin.pro
 make -j 4
-cp Tools/QtCreator/lib/qtcreator/plugins/libGitQlientPlugin.so libGitQlientPlugin-qtc${QTC_VERSION}.so
+cp Tools/QtCreator/lib/qtcreator/plugins/libGitQlientPlugin.so libGitQlientPlugin${PLUGIN_VERSION}-qtc${QTC_COMPAT}.so

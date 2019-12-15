@@ -36,6 +36,8 @@
 #include <projectexplorer/session.h>
 #include <projectexplorer/project.h>
 
+#include <utils/icon.h>
+
 namespace GitQlientNamespace
 {
 
@@ -55,7 +57,7 @@ MyMode::MyMode()
    setEnabled(true);
    setId(id);
 
-   setWidget(mGitImpl = new GitQlient());
+   setWidget(mGitImpl = new GitQlient({ "-noLog" }));
 
    mGitImpl->setObjectName("mainWindow");
 }

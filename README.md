@@ -5,7 +5,7 @@ GitQlientPlugin is the project to build and integrated a QtCreator plugin of Git
 You can find the plugin in the [release section](https://github.com/francescmm/GitQlientPlugin/releases). Once you have downloaded the plugin, copy it into the QtCreator folder where Qt is installed (Qt/Tools/QtCreator/lib/qtcreator/plugins) or in the following folders:
 
 Linux
-``~/.local/share/data/QtProject/qtcreator/plugin/<version>``
+``~/.local/share/data/QtProject/qtcreator/plugins/<version>``
 
 Windows
 ``%LOCALAPPDATA%\QtProject\qtcreator\plugins\<version>``

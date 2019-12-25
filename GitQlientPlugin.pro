@@ -18,12 +18,12 @@ INCLUDEPATH+= src
 
 ## Either set the IDE_SOURCE_TREE when running qmake,
 ## or set the QTC_SOURCE environment variable, to override the default setting
-IDE_SOURCE_TREE = $$QTC_SOURCE
+isEmpty(IDE_SOURCE_TREE): IDE_SOURCE_TREE = $$QTC_SOURCE
 isEmpty(IDE_SOURCE_TREE): IDE_SOURCE_TREE = $$(HOME)/Qt/qt-creator-opensource-src-4.11.0
 
 ## Either set the IDE_BUILD_TREE when running qmake,
 ## or set the QTC_BUILD environment variable, to override the default setting
-IDE_BUILD_TREE = $$QTC_BUILD
+isEmpty(IDE_BUILD_TREE): IDE_BUILD_TREE = $$QTC_BUILD
 isEmpty(IDE_BUILD_TREE): IDE_BUILD_TREE = $$(HOME)/Qt/Tools/QtCreator
 
 ## uncomment to build plugin into user config directory

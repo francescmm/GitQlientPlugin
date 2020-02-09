@@ -1,4 +1,5 @@
 DEFINES += GITQLIENTPLUGIN_LIBRARY
+DEFINES += VER=\\\"1.0.0\\\"
 
 # GitEditorPlugin files
 
@@ -40,11 +41,11 @@ isEmpty(IDE_BUILD_TREE): IDE_BUILD_TREE = $$(HOME)/Qt/Tools/QtCreator
 
 INCLUDEPATH += \
     GitQlient \
-    GitQlient/app \
+    GitQlient/big_widgets \
     GitQlient/QLogger
 
 include(GitQlientPlugin_dependencies.pri)
-include(GitQlient/app/GitQlient.pri)
+include(GitQlient/App.pri)
 include(GitQlient/QLogger/QLogger.pri)
 
 ###### End _dependencies.pri contents ######

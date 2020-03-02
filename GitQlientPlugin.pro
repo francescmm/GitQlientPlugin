@@ -1,4 +1,5 @@
 DEFINES += GITQLIENTPLUGIN_LIBRARY
+DEFINES += VER=\\\"1.0.0\\\"
 
 # GitEditorPlugin files
 

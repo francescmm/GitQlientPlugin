@@ -32,20 +32,16 @@ GitQlientMode::GitQlientMode()
    mGitImpl->setObjectName("mainWindow");
 }
 
-GitQlientPlugin::GitQlientPlugin()
-{
-   mGitQlientMode = new GitQlientMode();
-}
+GitQlientPlugin::GitQlientPlugin() {}
 
-GitQlientPlugin::~GitQlientPlugin()
-{
-   delete mGitQlientMode;
-}
+GitQlientPlugin::~GitQlientPlugin() {}
 
 bool GitQlientPlugin::initialize(const QStringList &arguments, QString *errorString)
 {
    Q_UNUSED(arguments)
    Q_UNUSED(errorString)
+
+   mGitQlientMode = new GitQlientMode();
 
    connect(Core::ModeManager::instance(), &Core::ModeManager::currentModeAboutToChange, this,
            &GitQlientPlugin::aboutToChange);

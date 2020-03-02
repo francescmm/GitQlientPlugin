@@ -9,9 +9,7 @@ SOURCES += \
     GitQlientPlugin.cpp
 
 HEADERS += \
-    GitQlientPlugin.h \
-    GitQlientPlugin_global.h \
-    GitQlientPluginConstants.h
+    GitQlientPlugin.h
 
 INCLUDEPATH+= src
 

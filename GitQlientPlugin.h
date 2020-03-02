@@ -1,11 +1,8 @@
-#ifndef GitQlientPlugin_H
-#define GitQlientPlugin_H
+#pragma once
 
-#include "GitQlientPlugin_global.h"
 #include <coreplugin/imode.h>
 
 #include <extensionsystem/iplugin.h>
-#include <coreplugin/idocument.h>
 
 using namespace Core;
 
@@ -16,12 +13,12 @@ namespace GitQlientNamespace
 namespace Internal
 {
 
-class MyMode : public Core::IMode
+class GitQlientMode : public Core::IMode
 {
    Q_OBJECT
 
 public:
-   MyMode();
+   GitQlientMode();
 
    GitQlient *mGitImpl = nullptr;
 };
@@ -40,11 +37,11 @@ public:
    ShutdownFlag aboutToShutdown() override;
 
 private:
-   MyMode *myMode = nullptr;
+   GitQlientMode *mGitQlientMode = nullptr;
    QString mCurrentProject;
+
+   void aboutToChange(Core::Id mode);
 };
 
 } // namespace Internal
 } // namespace GitQlientPlugin
-
-#endif // GitQlientPlugin_H

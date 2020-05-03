@@ -1,9 +1,12 @@
 #include "GitQlientPlugin.h"
 
 #include <coreplugin/modemanager.h>
+#include <coreplugin/actionmanager/actioncontainer.h>
+#include <coreplugin/actionmanager/actionmanager.h>
 #include <utils/macroexpander.h>
 #include <projectexplorer/session.h>
 #include <projectexplorer/project.h>
+#include <coreplugin/editormanager/editormanager.h>
 
 #include <GitQlient.h>
 
@@ -30,11 +33,15 @@ GitQlientMode::GitQlientMode()
    setWidget(mGitImpl = new GitQlient({ "-noLog" }));
 
    mGitImpl->setObjectName("mainWindow");
+
+   connect(mGitImpl, &GitQlient::signalEditDocument, [](const QString &fileName, int row, int col) {
+      Core::EditorManager::instance()->openEditorAt(fileName, row, col);
+   });
 }
 
-GitQlientPlugin::GitQlientPlugin() {}
+GitQlientPlugin::GitQlientPlugin() { }
 
-GitQlientPlugin::~GitQlientPlugin() {}
+GitQlientPlugin::~GitQlientPlugin() { }
 
 bool GitQlientPlugin::initialize(const QStringList &arguments, QString *errorString)
 {
@@ -66,7 +73,7 @@ void GitQlientPlugin::aboutToChange(Core::Id mode)
    }
 }
 
-void GitQlientPlugin::extensionsInitialized() {}
+void GitQlientPlugin::extensionsInitialized() { }
 
 ExtensionSystem::IPlugin::ShutdownFlag GitQlientPlugin::aboutToShutdown()
 {

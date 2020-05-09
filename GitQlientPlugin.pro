@@ -1,5 +1,10 @@
 DEFINES += GITQLIENTPLUGIN_LIBRARY
-DEFINES += VER=\\\"1.0.0\\\"
+
+GQ_SHA = $$system(git rev-parse HEAD)
+
+DEFINES += VER=\\\"1.1.0\\\" \
+    SHA_VER=\\\"$$GQ_SHA\\\"
+
 
 # GitEditorPlugin files
 

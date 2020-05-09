@@ -1,7 +1,7 @@
 language: cpp
 env:
-  - QTC_VERSION="4.11"
-  #- QTC_VERSION="4.12" -> Uncomment for several build with different environment variables -> Add version in GitHub!
+  - QTC_VERSION="4.12"
+  #- QTC_VERSION="4.11" -> Uncomment for several build with different environment variables -> Add version in GitHub!
 git:
   depth: 1
 sudo: required

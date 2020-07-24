@@ -45,11 +45,15 @@ isEmpty(IDE_BUILD_TREE): IDE_BUILD_TREE = $$(HOME)/Qt/Tools/QtCreator
 INCLUDEPATH += \
     GitQlient \
     GitQlient/big_widgets \
-    GitQlient/QLogger
+    GitQlient/QLogger \
+    GitQlient/QPinnableTabWidget \
+    GitQlient/BenchmarkTool/BenchmarkLib
 
 include(GitQlientPlugin_dependencies.pri)
 include(GitQlient/src/App.pri)
 include(GitQlient/QLogger/QLogger.pri)
+include(GitQlient/QPinnableTabWidget/QPinnableTabWidget.pri)
+include(GitQlient/BenchmarkTool/BenchmarkLib/BenchmarkTool.pri)
 
 ###### End _dependencies.pri contents ######
 

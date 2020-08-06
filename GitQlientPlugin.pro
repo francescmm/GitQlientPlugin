@@ -8,7 +8,7 @@ DEFINES += VER=\\\"1.3.0\\\" \
 
 # GitEditorPlugin files
 
-CONFIG += qt warn_on c++17
+CONFIG += qt warn_on c++17 c++1z
 
 SOURCES += \
     GitQlientPlugin.cpp

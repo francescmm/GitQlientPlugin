@@ -2,7 +2,7 @@ DEFINES += GITQLIENTPLUGIN_LIBRARY
 
 GQ_SHA = $$system(git rev-parse HEAD)
 
-DEFINES += VER=\\\"1.1.0\\\" \
+DEFINES += VER=\\\"1.3.0\\\" \
     SHA_VER=\\\"$$GQ_SHA\\\"
 
 

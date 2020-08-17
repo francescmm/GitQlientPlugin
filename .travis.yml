@@ -20,7 +20,7 @@ jobs:
 before_deploy:
   - git config --local user.name "Francesc Martinez"
   - git config --local user.email "francescmm@gmail.com"
-  - export FILE=$(ls libGitQlientPlugin_$PLUGIN_VERSION-qtc${QTC_COMPAT}*)
+  - export FILE=$(ls libGitQlientPlugin_${PLUGIN_VERSION}-qtc${QTC_VERSION}.*)
 deploy:
   provider: releases
   token:

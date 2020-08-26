@@ -1,4 +1,4 @@
-wget -O qtcreator-src.zip https://github.com/francescmm/ci-utils/releases/download/qt/qt-creator-opensource-src-${QTC_VERSION}.0.zip;
+wget -O qtcreator-src.zip https://github.com/francescmm/ci-utils/releases/download/qt/qt-creator-opensource-src.zip;
 unzip -qq qtcreator-src.zip
 mv /Applications/Qt\ Creator.app/ /Applications/QtCreator.app/
 export QT_CREATOR=/Applications/QtCreator.app/

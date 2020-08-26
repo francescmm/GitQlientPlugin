@@ -1,6 +1,6 @@
 wget -O qt5.zip https://github.com/francescmm/ci-utils/releases/download/qt/qt5.zip;
 unzip -qq qt5.zip;
-wget -O qtcreator-src.zip https://github.com/francescmm/ci-utils/releases/download/qt/qt-creator-opensource-src-${QTC_VERSION}.0.zip;
+wget -O qtcreator-src.zip https://github.com/francescmm/ci-utils/releases/download/qt/qt-creator-opensource-src.zip;
 unzip -qq qtcreator-src.zip
 wget -O qtcreator-bin.zip https://github.com/francescmm/ci-utils/releases/download/qt/qt-creator-bin-linux.zip;
 unzip -qq qtcreator-bin.zip

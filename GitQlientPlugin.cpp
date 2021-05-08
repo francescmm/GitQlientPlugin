@@ -23,25 +23,18 @@ GitQlientMode::GitQlientMode()
    const Utils::Icon FLAT_ACTIVE({ { ":/git.png", Utils::Theme::IconsModeEditActiveColor } });
    setIcon(Utils::Icon::modeIcon(FLAT, FLAT, FLAT_ACTIVE));
 
-   Core::Id id("GitQlient");
+   Utils::Id id("GitQlient");
 
    setDisplayName("GitQlient");
    setPriority(0);
    setEnabled(true);
    setId(id);
 
-   setWidget(mGitImpl = new GitQlient({ "-noLog" }));
+   setWidget(mGitImpl = new GitQlient());
+   mGitImpl->setArgumentsPostInit({ "-noLog" });
 
    mGitImpl->setObjectName("mainWindow");
-
-   connect(mGitImpl, &GitQlient::signalEditDocument, [](const QString &fileName, int row, int col) {
-      Core::EditorManager::instance()->openEditorAt(fileName, row, col);
-   });
 }
-
-GitQlientPlugin::GitQlientPlugin() { }
-
-GitQlientPlugin::~GitQlientPlugin() { }
 
 bool GitQlientPlugin::initialize(const QStringList &arguments, QString *errorString)
 {
@@ -56,12 +49,12 @@ bool GitQlientPlugin::initialize(const QStringList &arguments, QString *errorStr
    return true;
 }
 
-void GitQlientPlugin::aboutToChange(Core::Id mode)
+void GitQlientPlugin::aboutToChange(Utils::Id mode)
 {
    if (mode == mGitQlientMode->id())
    {
       bool found;
-      const auto workingDirectory = Utils::globalMacroExpander()->value("CurrentProject:Path", &found);
+      Utils::globalMacroExpander()->value("CurrentProject:Path", &found);
       QStringList currentOpenedProjects;
 
       for (auto project : ProjectExplorer::SessionManager::projects())

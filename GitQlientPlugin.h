@@ -29,8 +29,8 @@ class GitQlientPlugin : public ExtensionSystem::IPlugin
    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QtCreatorPlugin" FILE "GitQlientPlugin.json")
 
 public:
-   GitQlientPlugin();
-   ~GitQlientPlugin() override;
+   GitQlientPlugin() = default;
+   ~GitQlientPlugin() override = default;
 
    bool initialize(const QStringList &arguments, QString *errorString) override;
    void extensionsInitialized() override;
@@ -40,7 +40,7 @@ private:
    GitQlientMode *mGitQlientMode = nullptr;
    QString mCurrentProject;
 
-   void aboutToChange(Core::Id mode);
+   void aboutToChange(Utils::Id mode);
 };
 
 } // namespace Internal

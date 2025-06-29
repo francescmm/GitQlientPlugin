@@ -67,40 +67,6 @@ if(WITH_TESTS)
   enable_testing()
 endif()
 
-file(GLOB SRC_FILES
-  #${PROJECT_SOURCE_DIR}/GitQlient/src/resources.qrc
-  #${PROJECT_SOURCE_DIR}/GitQlient/src/big_widgets/*.cpp
-  #${PROJECT_SOURCE_DIR}/GitQlient/src/big_widgets/*.h
-  #${PROJECT_SOURCE_DIR}/GitQlient/src/big_widgets/*.ui
-  #${PROJECT_SOURCE_DIR}/GitQlient/src/branches/*.cpp
-  #${PROJECT_SOURCE_DIR}/GitQlient/src/branches/*.h
-  #${PROJECT_SOURCE_DIR}/GitQlient/src/branches/*.ui
-  #${PROJECT_SOURCE_DIR}/GitQlient/src/cache/*.cpp
-  #${PROJECT_SOURCE_DIR}/GitQlient/src/cache/*.h
-  #${PROJECT_SOURCE_DIR}/GitQlient/src/cache/*.ui
-  #${PROJECT_SOURCE_DIR}/GitQlient/src/commits/*.cpp
-  #${PROJECT_SOURCE_DIR}/GitQlient/src/commits/*.h
-  #${PROJECT_SOURCE_DIR}/GitQlient/src/commits/*.ui
-  #${PROJECT_SOURCE_DIR}/GitQlient/src/config/*.cpp
-  #${PROJECT_SOURCE_DIR}/GitQlient/src/config/*.h
-  #${PROJECT_SOURCE_DIR}/GitQlient/src/config/*.ui
-  #${PROJECT_SOURCE_DIR}/GitQlient/src/diff/*.cpp
-  #${PROJECT_SOURCE_DIR}/GitQlient/src/diff/*.h
-  #${PROJECT_SOURCE_DIR}/GitQlient/src/diff/*.ui
-  #${PROJECT_SOURCE_DIR}/GitQlient/src/git/*.cpp
-  #${PROJECT_SOURCE_DIR}/GitQlient/src/git/*.h
-  #${PROJECT_SOURCE_DIR}/GitQlient/src/git/*.ui
-  #${PROJECT_SOURCE_DIR}/GitQlient/src/git_server/*.cpp
-  #${PROJECT_SOURCE_DIR}/GitQlient/src/git_server/*.h
-  #${PROJECT_SOURCE_DIR}/GitQlient/src/git_server/*.ui
-  #${PROJECT_SOURCE_DIR}/GitQlient/src/history/*.cpp
-  #${PROJECT_SOURCE_DIR}/GitQlient/src/history/*.h
-  #${PROJECT_SOURCE_DIR}/GitQlient/src/history/*.ui
-  #${PROJECT_SOURCE_DIR}/GitQlient/src/QPinnableTabWidget/*.cpp
-  #${PROJECT_SOURCE_DIR}/GitQlient/src/QPinnableTabWidget/*.h
-  #${PROJECT_SOURCE_DIR}/GitQlient/src/QPinnableTabWidget/*.ui
-)
-
 add_subdirectory(GitQlient/src/aux_widgets)
 add_subdirectory(GitQlient/src/AuxiliarCustomWidgets)
 add_subdirectory(GitQlient/src/big_widgets)
@@ -113,6 +79,13 @@ add_subdirectory(GitQlient/src/git)
 add_subdirectory(GitQlient/src/history)
 add_subdirectory(GitQlient/src/QLogger)
 add_subdirectory(GitQlient/src/QPinnableTabWidget)
+
+qt_add_resources(
+  RESOURCES
+    GitQlientPlugin.qrc
+    GitQlient/src/GitQlient.qrc
+    GitQlient/src/AuxiliarCustomWidgets/resources.qrc
+)
 
 add_qtc_plugin(GitQlientPlugin
   PLUGIN_DEPENDS
@@ -134,33 +107,15 @@ add_qtc_plugin(GitQlientPlugin
     gitqlientplugin.cpp
     gitqlientpluginconstants.h
     gitqlientplugintr.h
-    ${SRC_FILES}
-)
-
-target_include_directories(
-   GitQlientPlugin
-   PUBLIC
-     GitQlient/src
-     GitQlient/src/AuxiliarCustomWidgets
-     GitQlient/src/aux_widgets
-     GitQlient/src/big_widgets
-     GitQlient/src/branches
-     GitQlient/src/cache
-     GitQlient/src/commits
-     GitQlient/src/config
-     GitQlient/src/diff
-     GitQlient/src/git
-     GitQlient/src/git_server
-     GitQlient/src/history
-     GitQlient/src/QLogger
-     GitQlient/src/QPinnableTabWidget
+    GitQlientPlugin.qrc
+    GitQlient/src/GitQlient.qrc
+    ${RESOURCES}
 )
 
 target_sources(
   GitQlientPlugin
-  PUBLIC
-    GitQlientPlugin.qrc
-    ${SRC_FILES}
+  PRIVATE
+    ${RESOURCES}
 )
 
 # Enable the Run button in Qt Creator

@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>git.png</file>
+        <file>GitQlient/src/GitQlient.qrc</file>
     </qresource>
 </RCC>

@@ -1,14 +1,13 @@
 {
     "Id" : "gitqlientplugin",
     "Name" : "GitQlientPlugin",
-    "Version" : "0.0.1",
-    "CompatVersion" : "0.0.1",
+    "Version" : "1.5.0",
     "Vendor" : "Francesc M.",
-    "VendorId" : "francescm.",
-    "Copyright" : "(C) Francesc M.",
-    "License" : "GPLv2",
+    "VendorId" : "francescmm",
+    "Copyright" : "(C)  ${IDE_COPYRIGHT_YEAR} Francesc M.",
+    "License" : "GPLv3",
     "Description" : "This plugins allows the user to work with GitQlient embedded in QtCreator. It provides a Git UI.",
-    "Url" : "https://www.fmaestre..com",
-    "DocumentationUrl" : "",
+    "Url" : "https://github.com/francescmm/GitQlientPlugin",
+    "DocumentationUrl" : "https://github.com/francescmm/GitQlientPlugin",
     ${IDE_PLUGIN_DEPENDENCIES}
 }

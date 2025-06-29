@@ -1,8 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
 
-# Remove when sharing with others.
-list(APPEND CMAKE_PREFIX_PATH "C:/Qt/Tools/QtCreator")
-
 project(GitQlientPlugin)
 
 set(CMAKE_AUTOMOC ON)

@@ -319,11 +319,7 @@ jobs:
       with:
         tag_name: v${{ needs.build.outputs.tag }}
         files: |
-          release/${{ env.PLUGIN_NAME}}-QtC${{ matrix.qt_config.qt_creator_version }}-Linux-arm64.7z
-          release/${{ env.PLUGIN_NAME}}-QtC${{ matrix.qt_config.qt_creator_version }}-Linux-x64.7z
-          release/${{ env.PLUGIN_NAME}}-QtC${{ matrix.qt_config.qt_creator_version }}-macOS-universal.7z
-          release/${{ env.PLUGIN_NAME}}-QtC${{ matrix.qt_config.qt_creator_version }}-Windows-arm64.7z
-          release/${{ env.PLUGIN_NAME}}-QtC${{ matrix.qt_config.qt_creator_version }}-Windows-x64.7z
+          release/*.7z
         draft: false
         prerelease: false
 

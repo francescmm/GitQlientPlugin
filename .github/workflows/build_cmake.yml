@@ -4,7 +4,6 @@ on: [push]
 
 env:
   PLUGIN_NAME: GitQlientPlugin
-  QT_VERSION: 6.9.1
   QT_CREATOR_VERSION: 17.0.0
   MACOS_DEPLOYMENT_TARGET: "11.0"
   CMAKE_VERSION: "3.29.6"
@@ -50,6 +49,15 @@ jobs:
             os: macos-latest,
             platform: mac_x64,
             cc: "clang", cxx: "clang++"
+          }
+        qt_config:
+        - {
+            qt_version: "6.9.1",
+            qt_creator_version: "17.0.0"
+          }
+        - {
+            qt_version: "6.8.3",
+            qt_creator_version: "16.0.2"
           }
 
     steps:
@@ -112,7 +120,7 @@ jobs:
       id: qt
       shell: cmake -P {0}
       run: |
-        set(qt_version "$ENV{QT_VERSION}")
+        set(qt_version "${{ matrix.qt_config.qt_version }}")
 
         function(download_qt platform export_qt_dir)
           string(REPLACE "." "" qt_version_dotless "${qt_version}")

@@ -36,6 +36,8 @@ namespace GitQlientPlugin::Internal {
 
 class GitQlientMode final : public IMode
 {
+    Q_OBJECT
+
 public:
     GitQlientMode();
 

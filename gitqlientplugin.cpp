@@ -18,15 +18,12 @@
 #include <utils/macroexpander.h>
 #include <extensionsystem/iplugin.h>
 
-//#include <GitQlient.h>
-
 #include <QAction>
 #include <QMainWindow>
 #include <QMenu>
 #include <QMessageBox>
 #include <QIcon>
 
-#include <QLogger.h>
 #include <GitQlient.h>
 
 using namespace Core;

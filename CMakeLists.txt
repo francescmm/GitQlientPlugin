@@ -48,7 +48,7 @@ if (NOT EXISTS "${PROJECT_SOURCE_DIR}/src/AuxiliarCustomWidgets/.git" OR
     endif()
 endif()
 
-find_package(QtCreator REQUIRED COMPONENTS Core TextEditor)
+find_package(QtCreator REQUIRED COMPONENTS Core TextEditor CppEditor)
 find_package(Qt6 COMPONENTS Core Widgets Network REQUIRED)
 
 # Add a CMake option that enables building your plugin with tests.
@@ -93,6 +93,7 @@ add_qtc_plugin(GitQlientPlugin
     QtCreator::Core
     QtCreator::TextEditor
     QtCreator::ProjectExplorer
+    QtCreator::CppEditor
   DEPENDS
     Qt::Widgets
     Qt::Core

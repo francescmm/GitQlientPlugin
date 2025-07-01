@@ -8,15 +8,18 @@
 #include <coreplugin/icontext.h>
 #include <coreplugin/icore.h>
 #include <coreplugin/imode.h>
-#include <coreplugin/rightpane.h>
 #include <coreplugin/coreicons.h>
 #include <coreplugin/modemanager.h>
-#include <coreplugin/session.h>
 #include <projectexplorer/projectmanager.h>
 #include <projectexplorer/project.h>
 #include <projectexplorer/projectexplorer.h>
+#include <projectexplorer/projectexplorerconstants.h>
 #include <utils/macroexpander.h>
 #include <extensionsystem/iplugin.h>
+#include <coreplugin/editormanager/editormanager.h>
+#include <coreplugin/actionmanager/actionmanager.h>
+#include <coreplugin/actionmanager/command.h>
+#include <cppeditor/cppeditorconstants.h>
 
 #include <QAction>
 #include <QMainWindow>
@@ -28,91 +31,108 @@
 
 using namespace Core;
 using namespace Core::Internal;
+using namespace ProjectExplorer::Constants;
 
-namespace GitQlientPlugin::Internal {
+namespace GitQlientPlugin::Internal
+{
 
 class GitQlientMode final : public IMode
 {
-    Q_OBJECT
+   Q_OBJECT
 
 public:
-    GitQlientMode();
+   GitQlientMode();
 
+   ~GitQlientMode() final = default;
 
-    ~GitQlientMode() final = default;
-
-    GitQlient *mGitImpl = nullptr;
+   GitQlient *mGitImpl = nullptr;
 };
 
 GitQlientMode::GitQlientMode()
 {
-    const Utils::Icon FLAT({ { ":/git.png", Utils::Theme::IconsBaseColor } });
+   const Utils::Icon FLAT({ { ":/git.png", Utils::Theme::IconsBaseColor } });
 
-    setObjectName(QLatin1String("GitQlient"));
-    setDisplayName(Tr::tr("GitQlient"));
-    setIcon(Utils::Icon::combinedIcon({FLAT, FLAT}));
-    setPriority(0);
-    Utils::Id id("GitQlient");
-    setId(id);
-    setEnabled(true);
+   setObjectName(QLatin1String("GitQlient"));
+   setDisplayName(Tr::tr("GitQlient"));
+   setIcon(Utils::Icon::combinedIcon({ FLAT, FLAT }));
+   setPriority(0);
+   Utils::Id id("GitQlient");
+   setId(id);
+   setEnabled(true);
 
-    setWidget(mGitImpl = new GitQlient());
-    mGitImpl->setArgumentsPostInit({ "-noLog" });
-    mGitImpl->setObjectName("mainWindow");
+   setWidget(mGitImpl = new GitQlient());
+   mGitImpl->setArgumentsPostInit({ "-noLog" });
+   mGitImpl->setObjectName("mainWindow");
 }
 
-class GitQlientPluginPlugin final : public ExtensionSystem::IPlugin
+class GitQlientPluginClass final : public ExtensionSystem::IPlugin
 {
-    Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QtCreatorPlugin" FILE "GitQlientPlugin.json")
+   Q_OBJECT
+   Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QtCreatorPlugin" FILE "GitQlientPlugin.json")
 
-    GitQlientMode *mGitQlientMode = nullptr;
+   GitQlientMode *mGitQlientMode = nullptr;
+   QAction *mBlame = nullptr;
 
 public:
-    GitQlientPluginPlugin() = default;
+   GitQlientPluginClass() = default;
 
-    ~GitQlientPluginPlugin() = default;
+   ~GitQlientPluginClass() = default;
 
-    void initialize()
-    {
-        mGitQlientMode = new GitQlientMode();
+   void initialize()
+   {
+      mBlame = new QAction(tr("Blame"), this);
+      connect(mBlame, &QAction::triggered, this, &GitQlientPluginClass::onBlame);
 
-        connect(Core::ModeManager::instance(), &Core::ModeManager::currentModeAboutToChange, this,
-                &GitQlientPluginPlugin::aboutToChange);
-    }
+      auto am = Core::ActionManager::instance();
+      Core::Context globalcontext(Core::Constants::C_GLOBAL);
 
-    void extensionsInitialized()
-    {
-        // Retrieve objects from the plugin manager's object pool, if needed. (rare)
-        // In the extensionsInitialized function, a plugin can be sure that all
-        // plugins that depend on it have passed their initialize() and
-        // extensionsInitialized() phase.
-    }
+      auto command = am->registerAction(mBlame, "Blame", globalcontext);
+      command->setAttribute(Core::Command::CA_UpdateText);
+      // TODO: Set a shortcut
+      // command->setDefaultKeySequence(QKeySequence(tr("Ctrl+Shift+F5")));
 
-    ShutdownFlag aboutToShutdown()
-    {
-        // Save settings
-        // Disconnect from signals that are not needed during shutdown
-        // Hide UI (if you add UI that is not in the main window directly)
-        return SynchronousShutdown;
-    }
+      auto menu = am->createMenu("GitQlient");
+      menu->menu()->setTitle("GitQlient");
+      menu->addAction(command);
 
-    void aboutToChange(Utils::Id mode)
-    {
-        if (mode == mGitQlientMode->id())
-        {
-            bool found;
-            Utils::globalMacroExpander()->value("CurrentProject:Path", &found);
-            QStringList currentOpenedProjects;
+      if (auto contextMenu = ActionManager::actionContainer(CppEditor::Constants::M_CONTEXT))
+      {
+         contextMenu->addSeparator();
+         contextMenu->addMenu(menu);
+      }
 
-            for (auto project : ProjectExplorer::ProjectManager::projects())
-                currentOpenedProjects.append(project->projectDirectory().toUrlishString());
+      auto fileMenu = ActionManager::actionContainer(M_FILECONTEXT);
+      fileMenu->addMenu(menu, G_FILE_OTHER);
 
-            mGitQlientMode->mGitImpl->setRepositories(currentOpenedProjects);
+      mGitQlientMode = new GitQlientMode();
 
-            Core::ModeManager::instance()->setFocusToCurrentMode();
-        }
-    }
+      connect(Core::ModeManager::instance(), &Core::ModeManager::currentModeAboutToChange, this,
+              &GitQlientPluginClass::aboutToChange);
+   }
+
+   void onBlame()
+   {
+      QMessageBox::information(Core::ICore::mainWindow(), tr("Blame"), tr("Hello from GitQlientPlugin!"));
+   }
+
+   ShutdownFlag aboutToShutdown() { return SynchronousShutdown; }
+
+   void aboutToChange(Utils::Id mode)
+   {
+      if (mode == mGitQlientMode->id())
+      {
+         bool found;
+         Utils::globalMacroExpander()->value("CurrentProject:Path", &found);
+         QStringList currentOpenedProjects;
+
+         for (auto project : ProjectExplorer::ProjectManager::projects())
+            currentOpenedProjects.append(project->projectDirectory().toUrlishString());
+
+         mGitQlientMode->mGitImpl->setRepositories(currentOpenedProjects);
+
+         Core::ModeManager::instance()->setFocusToCurrentMode();
+      }
+   }
 };
 
 } // namespace GitQlientPlugin::Internal

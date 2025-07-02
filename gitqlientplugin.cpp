@@ -14,6 +14,7 @@
 #include <projectexplorer/project.h>
 #include <projectexplorer/projectexplorer.h>
 #include <projectexplorer/projectexplorerconstants.h>
+#include <coreplugin/session.h>
 #include <utils/macroexpander.h>
 #include <extensionsystem/iplugin.h>
 #include <coreplugin/editormanager/editormanager.h>
@@ -59,8 +60,8 @@ GitQlientMode::GitQlientMode()
    Utils::Id id("GitQlient");
    setId(id);
    setEnabled(true);
-
    setWidget(mGitImpl = new GitQlient());
+
    mGitImpl->setArgumentsPostInit({ "-noLog" });
    mGitImpl->setObjectName("mainWindow");
 }
@@ -110,10 +111,7 @@ public:
               &GitQlientPluginClass::aboutToChange);
    }
 
-   void onBlame()
-   {
-      QMessageBox::information(Core::ICore::mainWindow(), tr("Blame"), tr("Hello from GitQlientPlugin!"));
-   }
+   void onBlame() { }
 
    ShutdownFlag aboutToShutdown() { return SynchronousShutdown; }
 
@@ -123,14 +121,14 @@ public:
       {
          bool found;
          Utils::globalMacroExpander()->value("CurrentProject:Path", &found);
-         QStringList currentOpenedProjects;
 
-         for (auto project : ProjectExplorer::ProjectManager::projects())
-            currentOpenedProjects.append(project->projectDirectory().toUrlishString());
+         if (auto currentProject = ProjectExplorer::ProjectManager::instance()->startupProject())
+         {
+            QString repoPath = currentProject->projectDirectory().toUrlishString();
 
-         mGitQlientMode->mGitImpl->setRepositories(currentOpenedProjects);
-
-         Core::ModeManager::instance()->setFocusToCurrentMode();
+            mGitQlientMode->mGitImpl->setRepositories({ repoPath });
+            Core::ModeManager::instance()->setFocusToCurrentMode();
+         }
       }
    }
 };

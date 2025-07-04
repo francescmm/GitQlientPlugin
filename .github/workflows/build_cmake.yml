@@ -3,7 +3,7 @@ name: Build plugin
 on: [push]
 
 env:
-  PLUGIN_NAME: GitQlientPlugin
+  PLUGIN_NAME: GitQlient
   MACOS_DEPLOYMENT_TARGET: "11.0"
   CMAKE_VERSION: "3.29.6"
   NINJA_VERSION: "1.12.1"

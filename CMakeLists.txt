@@ -83,7 +83,7 @@ add_subdirectory(GitQlient/src/QPinnableTabWidget)
 
 qt_add_resources(
   RESOURCES
-    GitQlient.qrc
+    gitqlientp.qrc
     GitQlient/src/GitQlient.qrc
     GitQlient/src/AuxiliarCustomWidgets/resources.qrc
 )
@@ -109,7 +109,7 @@ add_qtc_plugin(GitQlient
     gitqlient.cpp
     gitqlientconstants.h
     gitqlienttr.h
-    GitQlient.qrc
+    gitqlientp.qrc
     GitQlient/src/GitQlient.qrc
     ${RESOURCES}
 )

@@ -52,13 +52,11 @@ jobs:
         qt_config:
         - {
             qt_version: "6.9.1",
-            qt_creator_version: "17.0.0",
-            deploy_json: "true"
+            qt_creator_version: "17.0.0"
           }
         - {
             qt_version: "6.8.3",
-            qt_creator_version: "16.0.2",
-            deploy_json: "false"
+            qt_creator_version: "16.0.2"
           }
 
     steps:
@@ -290,11 +288,11 @@ jobs:
 
     # The json is the same for all platforms, but we need to save one if we Release on Extension Store
     - name: Upload plugin json
-      if: matrix.config.platform == 'linux_x64' && ${{ matrix.qt_config.deploy_json }} == 'true'
+      if: matrix.config.platform == 'linux_x64'
       uses: actions/upload-artifact@v4
       with:
         name: ${{ env.PLUGIN_NAME }}.json
-        path: ./build/build/${{ env.PLUGIN_NAME }}.json
+        path: ./build/build/${{ env.PLUGIN_NAME }}-QtC${{ matrix.qt_config.qt_creator_version }}.json
 
 
   release:

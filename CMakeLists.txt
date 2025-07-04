@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(GitQlientPlugin)
+project(GitQlient)
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
@@ -83,12 +83,12 @@ add_subdirectory(GitQlient/src/QPinnableTabWidget)
 
 qt_add_resources(
   RESOURCES
-    GitQlientPlugin.qrc
+    GitQlient.qrc
     GitQlient/src/GitQlient.qrc
     GitQlient/src/AuxiliarCustomWidgets/resources.qrc
 )
 
-add_qtc_plugin(GitQlientPlugin
+add_qtc_plugin(GitQlient
   PLUGIN_DEPENDS
     QtCreator::Core
     QtCreator::TextEditor
@@ -106,16 +106,16 @@ add_qtc_plugin(GitQlientPlugin
     .github/workflows/build_cmake.yml
     .github/workflows/README.md
     README.md
-    gitqlientplugin.cpp
-    gitqlientpluginconstants.h
-    gitqlientplugintr.h
-    GitQlientPlugin.qrc
+    gitqlient.cpp
+    gitqlientconstants.h
+    gitqlienttr.h
+    GitQlient.qrc
     GitQlient/src/GitQlient.qrc
     ${RESOURCES}
 )
 
 target_sources(
-  GitQlientPlugin
+  GitQlient
   PRIVATE
     ${RESOURCES}
 )
@@ -132,8 +132,8 @@ find_program(QtCreatorExecutable
 )
 if (QtCreatorExecutable)
   add_custom_target(RunQtCreator
-    COMMAND ${QtCreatorExecutable} -pluginpath $<TARGET_FILE_DIR:GitQlientPlugin>
-    DEPENDS GitQlientPlugin
+    COMMAND ${QtCreatorExecutable} -pluginpath $<TARGET_FILE_DIR:GitQlient>
+    DEPENDS GitQlient
   )
   set_target_properties(RunQtCreator PROPERTIES FOLDER "qtc_runnable")
 endif()

@@ -1,5 +1,5 @@
-#include "gitqlientpluginconstants.h"
-#include "gitqlientplugintr.h"
+#include "gitqlientconstants.h"
+#include "gitqlienttr.h"
 
 #include <coreplugin/actionmanager/actioncontainer.h>
 #include <coreplugin/actionmanager/actionmanager.h>
@@ -33,7 +33,7 @@ using namespace Core;
 using namespace Core::Internal;
 using namespace ProjectExplorer::Constants;
 
-namespace GitQlientPlugin::Internal
+namespace GitQlient::Internal
 {
 
 class GitQlientMode final : public IMode
@@ -65,23 +65,23 @@ GitQlientMode::GitQlientMode()
    mGitImpl->setObjectName("mainWindow");
 }
 
-class GitQlientPluginClass final : public ExtensionSystem::IPlugin
+class GitQlientClass final : public ExtensionSystem::IPlugin
 {
    Q_OBJECT
-   Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QtCreatorPlugin" FILE "GitQlientPlugin.json")
+   Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QtCreatorPlugin" FILE "GitQlient.json")
 
    GitQlientMode *mGitQlientMode = nullptr;
    QAction *mBlame = nullptr;
 
 public:
-   GitQlientPluginClass() = default;
+   GitQlientClass() = default;
 
-   ~GitQlientPluginClass() = default;
+   ~GitQlientClass() = default;
 
    void initialize()
    {
       mBlame = new QAction(tr("Blame"), this);
-      connect(mBlame, &QAction::triggered, this, &GitQlientPluginClass::onBlame);
+      connect(mBlame, &QAction::triggered, this, &GitQlientClass::onBlame);
 
       auto am = Core::ActionManager::instance();
       Core::Context globalcontext(Core::Constants::C_GLOBAL);
@@ -107,12 +107,12 @@ public:
       mGitQlientMode = new GitQlientMode();
 
       connect(Core::ModeManager::instance(), &Core::ModeManager::currentModeAboutToChange, this,
-              &GitQlientPluginClass::aboutToChange);
+              &GitQlientClass::aboutToChange);
    }
 
    void onBlame()
    {
-      QMessageBox::information(Core::ICore::mainWindow(), tr("Blame"), tr("Hello from GitQlientPlugin!"));
+      QMessageBox::information(Core::ICore::mainWindow(), tr("Blame"), tr("Hello from GitQlient!"));
    }
 
    ShutdownFlag aboutToShutdown() { return SynchronousShutdown; }
@@ -135,6 +135,6 @@ public:
    }
 };
 
-} // namespace GitQlientPlugin::Internal
+} // namespace GitQlient::Internal
 
-#include <gitqlientplugin.moc>
+#include <gitqlient.moc>

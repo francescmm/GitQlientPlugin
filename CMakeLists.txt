@@ -106,7 +106,7 @@ add_qtc_plugin(GitQlient
     .github/workflows/build_cmake.yml
     .github/workflows/README.md
     README.md
-    gitqlient.cpp
+    gitqlientp.cpp
     gitqlientconstants.h
     gitqlienttr.h
     gitqlientp.qrc

@@ -33,7 +33,7 @@ using namespace Core;
 using namespace Core::Internal;
 using namespace ProjectExplorer::Constants;
 
-namespace GitQlient::Internal
+namespace GitQlientPlugin::Internal
 {
 
 class GitQlientMode final : public IMode
@@ -135,6 +135,6 @@ public:
    }
 };
 
-} // namespace GitQlient::Internal
+} // namespace GitQlientPlugin::Internal
 
-#include <gitqlient.moc>
+#include <gitqlientp.moc>

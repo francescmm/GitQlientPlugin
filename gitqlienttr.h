@@ -2,7 +2,7 @@
 
 #include <QCoreApplication>
 
-namespace GitQlient {
+namespace GitQlientPlugin {
 
 struct Tr
 {
